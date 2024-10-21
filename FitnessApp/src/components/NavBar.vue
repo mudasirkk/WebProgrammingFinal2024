@@ -6,11 +6,9 @@ const isOpen = ref(false)
 </script>
 
 <template>
-     <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <img src="" alt="Site Logo" width="112" height="28">
-      </a>
+        <img alt="Vue logo" src="" width="30" height="30" />
       <a
         role="button"
         class="navbar-burger"
@@ -44,11 +42,11 @@ const isOpen = ref(false)
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-white">
-              <strong>Sign up</strong>
+            <a class="button is-primary">
+              <strong >Sign up</strong>
             </a>
-            <a class="button is-primary"> Log in </a>
-            <a class="button is-primary"> Tweet </a>
+            <a class="button is-light"> Log in </a>
+            <a class="button is-light"> Tweet </a>
           </div>
         </div>
       </div>
@@ -59,8 +57,21 @@ const isOpen = ref(false)
   
   <style scoped>
     .router-link-active {
-        font-weight: bold;
-        border-bottom: 2px solid blue;
+        box-shadow: inset;
+    }
+    .navbar-item {
+        color: white;
+        font-size: normal;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+    }
+    .navbar-link {
+        color: white;
+    }
+    .navbar-dropdown-navbar-item {
+        color: black;
+    }
+    button.is-light {
+        color: black;
     }
   </style>
   
