@@ -1,6 +1,6 @@
 <template>
-    <div class="admin">
-      <h1>This is a Admin page</h1>
+    <div class="user">
+      <h1>This is a User page</h1>
     </div>
   </template>
   
