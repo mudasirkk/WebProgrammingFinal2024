@@ -59,23 +59,29 @@ const isOpen = ref(false)
   </template>
   
   
-  <style scoped>
+<style scoped>
     .router-link-active {
         box-shadow: inset;
     }
+    .navbar {
+        min-height: 2.5rem !important;
+        padding: 0 1rem;
+    }
     .navbar-item {
+        color: white !important;
+        font-weight: 500;
+    }
+    .navbar-brand img {
+        max-height: 2.5rem;
+    }
+    .button.is-tweet {
+        background-color: transparent;
+        border: 1px solid white;
         color: white;
-        font-size: normal;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+        margin-left: 0.5rem;
     }
-    .navbar-link {
-        color: white;
+    .button.is-light {
+        margin-left: 0.5rem;
     }
-    .navbar-dropdown-navbar-item {
-        color: black;
-    }
-    button.is-light {
-        color: black;
-    }
-  </style>
+</style>
   

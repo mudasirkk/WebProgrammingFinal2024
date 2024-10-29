@@ -1,6 +1,6 @@
 <template>
     <div class="index">
-      <h1>This is a index page</h1>
+      <div id="app"></div>
     </div>
   </template>
   
