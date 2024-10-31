@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
-let isActive = ref(false);
-let isOpen = ref(false);
+const isActive = ref(false);
+const isOpen = ref(false);
 
 </script>
 
@@ -32,7 +32,6 @@ let isOpen = ref(false);
 
             <div id="navBarBasic" class="navbar-menu" :class="{ 'is-active': isOpen }">
                 <div class="navbar-start">
-                    <RouterLink to="/" class="navbar-item"> Home </RouterLink>
                     <RouterLink to="/" class="navbar-item"> My Activity </RouterLink>
                     <RouterLink to="/statistics" class="navbar-item"> Statistics </RouterLink>
                     <RouterLink to="/friends" class="navbar-item"> Friends Activity </RouterLink>
@@ -48,24 +47,24 @@ let isOpen = ref(false);
 
                 <div class="navbar-end">
                     <RouterLink to="/signup" class="navbar-item">Sign Up</RouterLink>
-                    <div class="navbar-item">
 
+                    <div class="navbar-item">
                         <div class="buttons">
                             <div class="dropdown is-active">
                                 <div class="dropdown-trigger">                                
-                                    <button @click="isActive = !isActive" class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-                                    <span>Log in</span>
-                                    <span class="icon is-small">
-                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
-                                    </span>
+                                    <button @click="isActive = !isActive" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <span>Log in</span>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                        </span>
                                     </button>
                                 </div>
 
-                                <div class="dropdown-menu" id="dropdown-menu1" role="menu" v-show="isActive">
+                                <div class="dropdown-menu" role="menu" v-show="isActive">
                                     <div class="dropdown-content">
-                                    
-                                        <a href="#" class="dropdown-item">Mudasir Khan</a>
-                                        <a href="#" class="dropdown-item">Billy Smith</a>
+                                        <a href="/statistics" class="dropdown-item">Mudasir Khan</a>
+                                        <a href="/statistics" class="dropdown-item">John Doe</a>
+                                        <a href="/statistics" class="dropdown-item">Jane Doe</a>
                                 
                                     </div>
                                 </div>
@@ -80,5 +79,5 @@ let isOpen = ref(false);
   </template>
   
   
-<style lang="scss" scoped></style>
+<style lang="css" scoped></style>
   

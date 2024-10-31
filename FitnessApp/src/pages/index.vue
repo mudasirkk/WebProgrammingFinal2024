@@ -1,15 +1,16 @@
 <template>
-    <div class="index">
-      <div id="app"></div>
-    </div>
-  </template>
+  <div>
+      <section class="hero">
+          <div class="hero-body">
+
+              <p>Select User from Dropdown In the Top Right
+              </p>
+            
+          </div>
+      </section>
+
+  </div>
+</template>
   
   <style>
-  @media (min-width: 1024px) {
-    .about {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-  }
   </style>
