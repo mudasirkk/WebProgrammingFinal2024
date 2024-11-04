@@ -1,14 +1,8 @@
 <template>
-  <div>
-      <section class="hero">
-          <div class="hero-body">
-
-              <p>Select User from Dropdown In the Top Right
-              </p>
-            
-          </div>
-      </section>
-
+  <div class="section is-large">
+    <div class="notification is-warning has-text-centered">
+      <h1 class="title is-3">You must select a User From the Dropdown to view Statistics.</h1>
+    </div> 
   </div>
 </template>
   
