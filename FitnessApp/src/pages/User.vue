@@ -1,9 +1,11 @@
 <template>
-    <div class="user">
-      <container></container>
-      <h1>Login</h1>
-      <h2>In the meantime you can login using the login menu on the top right.</h2>
-      <p>Logging in as Moshe should give you access to the Activity page as well as the admin pages (right now just users). Logging in as other should give you only the Activity page</p>
+    <div >
+      <button class="button is-primary" >
+        <span class="icon">
+          <i class="fas fa-plus"></i>
+        </span>
+        <span>Add User</span>
+      </button>
     </div>
   </template>
   

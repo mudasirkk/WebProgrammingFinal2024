@@ -2,7 +2,9 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
-const isOpen = ref(false)
+const isActive = ref(false);
+const isOpen = ref(false);
+
 </script>
 
 <template>
@@ -19,6 +21,7 @@ const isOpen = ref(false)
                     aria-expanded="false"
                     :class="{ 'is-active': isOpen }"
                     @click="isOpen = !isOpen"
+                    data-target="navBarBasic"
                 >
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -27,7 +30,7 @@ const isOpen = ref(false)
                 </a>
             </div>
 
-            <div class="navbar-menu" :class="{ 'is-active': isOpen }">
+            <div id="navBarBasic" class="navbar-menu" :class="{ 'is-active': isOpen }">
                 <div class="navbar-start">
                     <RouterLink to="/" class="navbar-item"> My Activity </RouterLink>
                     <RouterLink to="/statistics" class="navbar-item"> Statistics </RouterLink>
@@ -43,39 +46,38 @@ const isOpen = ref(false)
                 </div>
 
                 <div class="navbar-end">
+                    <RouterLink to="/signup" class="navbar-item">Sign Up</RouterLink>
+
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-primary">
-                                <RouterLink to="/signup" class="navbar-item"> Sign Up </RouterLink>
-                            </a>
-                            <a class="button is-light"> Log in </a>
-                            <a class="button is-light" href="https://x.com/"> Tweet </a>
+                            <div class="dropdown is-active">
+                                <div class="dropdown-trigger">                                
+                                    <button @click="isActive = !isActive" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <span>Log in</span>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+
+                                <div class="dropdown-menu" role="menu" v-show="isActive">
+                                    <div class="dropdown-content">
+                                        <a href="/statistics" class="dropdown-item">Mudasir Khan</a>
+                                        <a href="/statistics" class="dropdown-item">John Doe</a>
+                                        <a href="/statistics" class="dropdown-item">Jane Doe</a>
+                                
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-  </nav>
+    </nav>
   </template>
   
   
-  <style scoped>
-    .router-link-active {
-        box-shadow: inset;
-    }
-    .navbar-item {
-        color: white;
-        font-size: normal;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
-    }
-    .navbar-link {
-        color: white;
-    }
-    .navbar-dropdown-navbar-item {
-        color: black;
-    }
-    button.is-light {
-        color: black;
-    }
-  </style>
+<style lang="css" scoped></style>
   
