@@ -1,0 +1,95 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fname": "John",
+      "lname": "Doe",
+      "email": "john.doe@example.com",
+      "username": "johndoe",
+      "password": "pass123",
+      "isAdmin": false
+    },
+    {
+      "id": 2,
+      "fname": "Jane",
+      "lname": "Smith",
+      "email": "jane.smith@example.com",
+      "username": "janesmith",
+      "password": "pass321",
+      "isAdmin": false
+    },
+    {
+      "id": 3,
+      "fname": "Mudasir",
+      "lname": "Khan",
+      "email": "mudasir.khan@example.com",
+      "username": "mudasirkhan",
+      "password": "pass123",
+      "isAdmin": true
+    },
+    {
+      "id": 4,
+      "fname": "Bob",
+      "lname": "Brown",
+      "email": "bob.brown@example.com",
+      "username": "bobbrown",
+      "password": "pass321",
+      "isAdmin": false
+    },
+    {
+      "id": 5,
+      "fname": "Charlie",
+      "lname": "Davis",
+      "email": "charlie.davis@example.com",
+      "username": "charliedavis",
+      "password": "pass123",
+      "isAdmin": false
+    },
+    {
+      "id": 6,
+      "fname": "Eve",
+      "lname": "Martinez",
+      "email": "eve.martinez@example.com",
+      "username": "evemartinez",
+      "password": "pass321",
+      "isAdmin": false
+    },
+    {
+      "id": 7,
+      "fname": "Frank",
+      "lname": "Clark",
+      "email": "frank.clark@example.com",
+      "username": "frankclark",
+      "password": "pass123",
+      "isAdmin": false
+    },
+    {
+      "id": 8,
+      "fname": "Grace",
+      "lname": "Lee",
+      "email": "grace.lee@example.com",
+      "username": "gracelee",
+      "password": "pass321",
+      "isAdmin": false
+    },
+    {
+      "id": 9,
+      "fname": "Henry",
+      "lname": "Wilson",
+      "email": "henry.wilson@example.com",
+      "username": "henrywilson",
+      "password": "pass123",
+      "isAdmin": false
+    },
+    {
+      "id": 10,
+      "fname": "Ivy",
+      "lname": "Taylor",
+      "email": "ivy.taylor@example.com",
+      "username": "ivytaylor",
+      "password": "pass321",
+      "isAdmin": true
+    }
+  ],
+  "total": 10
+}

@@ -1,0 +1,55 @@
+{
+  "workouts": [
+    {
+      "id": 1,
+      "username": "johndoe",
+      "description": "Morning run along the park trail.",
+      "title": "Park Run",
+      "date": "2024-11-01",
+      "duration": 30,
+      "location": "Central Park",
+      "type": "Cardio"
+    },
+    {
+      "id": 2,
+      "username": "janesmith",
+      "description": "Yoga session focusing on flexibility and relaxation.",
+      "title": "Evening Yoga",
+      "date": "2024-11-02",
+      "duration": 60,
+      "location": "Fitness Studio",
+      "type": "Yoga"
+    },
+    {
+      "id": 3,
+      "username": "mudasirkhan",
+      "description": "Strength training focusing on upper body.",
+      "title": "Upper Body Strength",
+      "date": "2024-11-01",
+      "duration": 45,
+      "location": "Gym",
+      "type": "Strength"
+    },
+    {
+      "id": 4,
+      "username": "bobbrown",
+      "description": "Afternoon cycling session.",
+      "title": "Cycling",
+      "date": "2024-11-03",
+      "duration": 60,
+      "location": "Countryside Trail",
+      "type": "Cardio"
+    },
+    {
+      "id": 5,
+      "username": "charliedavis",
+      "description": "High-intensity interval training session.",
+      "title": "HIIT Workout",
+      "date": "2024-11-02",
+      "duration": 30,
+      "location": "Home",
+      "type": "HIIT"
+    }
+  ],
+  "total": 5
+}
