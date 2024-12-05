@@ -6,9 +6,7 @@ const session = getSession()
 </script>
 
 <template>
-  <div v-if="session.user">
-    <StatList />
-  </div>
+  <div v-if="session.user"></div>
   <div v-else>
     <p class="title is-2">Log in to see your stats</p>
   </div>
