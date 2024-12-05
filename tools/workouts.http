@@ -1,0 +1,75 @@
+GET http://localhost:3000/api/v1/workouts/
+
+###
+GET http://localhost:3000/api/v1/workouts/1
+###
+
+GET http://localhost:3000/api/v1/workouts/userid/1
+###
+DELETE http://localhost:3000/api/v1/workouts/1
+###
+POST http://localhost:3000/api/v1/workouts
+Content-Type: application/json
+
+{
+      "userid": 1,
+      "username": "johndoe",
+      "description": "A Swim across the Atlantic",
+      "title": "Atlantic Swim",
+      "date": "2000-01-01",
+      "duration": 300,
+      "location" : "Atlantic Ocean",
+      "type": "Swimming",
+}
+
+###
+PATCH http://localhost:3000/api/v1/workouts/1
+Content-Type: application/json
+
+{
+      "userid": 2,
+      "username": "janesmith",
+      "description": "A Swim across the Atlantic",
+      "title": "Atlantic Swim",
+      "date": "2000-01-01",
+      "duration": 400,
+      "location" : "Atlantic Ocean",
+      "type": "Swimming",
+}
+###
+GET http://localhost:3000/api/v1/workouts
+
+###
+GET http://localhost:3000/api/v1/users/
+
+###
+GET http://localhost:3000/api/v1/users/2
+
+###
+PATCH http://localhost:3000/api/v1/users/2
+
+Content-Type: application/json
+      {
+      "fname": "Jane",
+      "lname": "Smith",
+      "email": "jane.smith@example.com",
+      "username": "janesmith",
+      "password": "pass321",
+      "isAdmin": true
+    }
+
+###
+DELETE http://localhost:3000/api/v1/users/10
+
+###
+POST http://localhost:3000/api/v1/users/
+Content-Type: application/json
+
+{
+      "fname": "Moshe",
+      "lname": "Plotkin",
+      "email": "moshe.plotkin@example.com",
+      "username": "mosheplotkin",
+      "password": "pass321",
+      "isAdmin": false
+}

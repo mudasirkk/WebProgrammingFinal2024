@@ -3,8 +3,6 @@ const app = express();
 const userController = require("./controllers/users");
 const workoutController = require("./controllers/workouts");
 
-const { parseToken, requireAdmin } = require("./middleware/auth");
-
 const PORT = 3000;
 
 // Middleware
@@ -23,7 +21,7 @@ app
   .get("/", (req, res, next) => {
     res.send("Hello World");
   })
-  .use(parseToken)
+
   .use("/api/v1/users", userController)
   .use("/api/v1/workouts", workoutController)
 
@@ -43,10 +41,3 @@ app.listen(PORT, (err, data) => {
   console.log("Server is running at http://localhost:" + PORT);
 });
 console.log("Step #3");
-
-/*  Four types of async methods
-    1. Node Style Callbacks
-    2. Pipelines
-    3. Promises
-    4. Async/Await
-*/
