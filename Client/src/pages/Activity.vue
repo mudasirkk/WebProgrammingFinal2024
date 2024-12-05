@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import { getSession } from '@/models/login'
 import { ref } from 'vue'
-const stats = ref<Stats[]>([])
 
 const session = getSession()
-
-getAll().then((data) => {
-  console.log(data)
-  stats.value = data.data
-})
 </script>
 
 <template>
