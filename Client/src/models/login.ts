@@ -4,15 +4,14 @@ import { api } from './myFetch'
 import type { DataEnvelope } from './dataEnvelope'
 import type { User } from './users'
 
-const session = reactive({
+const sessionUser = reactive({
   user: null as User | null,
-  token: null as string | null,
-  isloading: false
+  token: null as string | null
 })
 
-export const refSession = () => session
+export const refSession = () => sessionUser
 
-export function useLogin() {
+export function userLogin() {
   const router = useRouter()
   return {
     async login(email: string, password: string): Promise<boolean> {
@@ -22,10 +21,10 @@ export function useLogin() {
       )
 
       if (response.isSuccess) {
-        session.user = response.data?.user || null
-        session.token = response.data?.token || null
+        sessionUser.user = response.data?.user || null
+        sessionUser.token = response.data?.token || null
 
-        if (session.user == null || session.token == null) {
+        if (sessionUser.user == null || sessionUser.token == null) {
           return false
         }
         router.push('/')
@@ -36,13 +35,13 @@ export function useLogin() {
       }
     },
     logout() {
-      session.user = null
-      session.token = null
+      sessionUser.user = null
+      sessionUser.token = null
       router.push('/login')
     }
   }
 }
 
 export function getSession() {
-  return session
+  return sessionUser
 }

@@ -1,9 +1,12 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+<script setup lang="ts">
+import CreateUser from '@/components/CreateUser.vue'
+</script>
+
 <template>
-    <div>
-        <h1>This is the Signup Page</h1>
-    </div>
+  <div>
+    <CreateUser />
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

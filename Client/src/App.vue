@@ -13,10 +13,6 @@ import NavBar from './components/NavBar.vue'
 </template>
 
 <style scoped>
-body {
-  background-color: saddlebrown;
-}
-
 .container {
   background-color: white;
   box-shadow: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));

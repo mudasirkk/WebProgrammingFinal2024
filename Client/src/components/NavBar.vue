@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import { userAuth } from '@/models/authentication'
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
-const isActive = ref(false)
 const isOpen = ref(false)
+const isUserSelectionOpen = ref(false)
+const { currUser, uLogout } = userAuth()
+
+const logOut = () => {
+  uLogout()
+}
 </script>
 
 <template>
@@ -20,7 +26,6 @@ const isOpen = ref(false)
           aria-expanded="false"
           :class="{ 'is-active': isOpen }"
           @click="isOpen = !isOpen"
-          data-target="navBarBasic"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -31,8 +36,10 @@ const isOpen = ref(false)
 
       <div id="navBarBasic" class="navbar-menu" :class="{ 'is-active': isOpen }">
         <div class="navbar-start">
-          <RouterLink to="/" class="navbar-item"> My Activity </RouterLink>
-          <RouterLink to="/statistics" class="navbar-item"> Statistics </RouterLink>
+          <RouterLink to="/" class="navbar-item"> <i class="fas fa-home"></i> Home </RouterLink>
+          <RouterLink to="/statistics" class="navbar-item">
+            <i class="fas fa-dumbbell"></i> Statistics
+          </RouterLink>
           <RouterLink to="/friends" class="navbar-item"> Friends Activity </RouterLink>
           <RouterLink to="/people" class="navbar-item"> People Search </RouterLink>
 
@@ -52,7 +59,7 @@ const isOpen = ref(false)
               <div class="dropdown is-active">
                 <div class="dropdown-trigger">
                   <button
-                    @click="isActive = !isActive"
+                    @click="isOpen = !isOpen"
                     class="button"
                     aria-haspopup="true"
                     aria-controls="dropdown-menu"
@@ -64,7 +71,7 @@ const isOpen = ref(false)
                   </button>
                 </div>
 
-                <div class="dropdown-menu" role="menu" v-show="isActive">
+                <div class="dropdown-menu" role="menu" v-show="isOpen">
                   <div class="dropdown-content">
                     <a href="/statistics" class="dropdown-item">Mudasir Khan</a>
                     <a href="/statistics" class="dropdown-item">John Doe</a>
