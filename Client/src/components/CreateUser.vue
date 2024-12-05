@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
-import { type User, add, getAll } from '@/models/users'
+import { add, getAll, type User } from '@/models/users'
 
 const fname = ref<string>('')
 const lname = ref<string>('')
 const email = ref<string>('')
 const username = ref<string>('')
 const password = ref<string>('')
-const confirmPassword = ref<string>('')
+const rePassword = ref<string>('')
 
 const router = useRouter()
-
+/*
 const signupUser = async () => {
-  if (password.value === '' || password.value !== confirmPassword.value) {
+  if (password.value === '' || password.value !== rePassword.value) {
     //Invalid Passwords or no Pass match
     alert('Invalid Password or Passwords do not match')
     return
@@ -45,78 +45,68 @@ try {
   router.push({ name: '/signin' })
 } catch (error) {
   console.error('User Registration Failed')
-}
+}*/
 </script>
 
 <template>
-  <p>Create User</p>
-  <div class="section">
-    <div class="columns is-centered">
-      <div class="column is-half">
-        <form class="box has-background-light">
-          <p class="title">Sign Up</p>
-          <div class="columns">
-            <div class="column is-half">
-              <div class="field">
-                <label for="fname" class="label">First Name</label>
-                <div class="control">
-                  <input type="text" id="fname" class="input" v-model="fname" />
-                </div>
-              </div>
-            </div>
-            <div class="column is-half">
-              <div class="field">
-                <label for="lname" class="label">Last Name</label>
-                <div class="control">
-                  <input type="text" id="lname" class="input" v-model="lname" />
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <form class="box has-background-light">
+        <p class="title is-1" style="text-align: center">Sign Up</p>
 
-          <div class="field">
-            <label for="email" class="label">Email</label>
-            <div class="control">
-              <input type="email" id="email" class="input" v-model="email" />
-            </div>
+        <div class="field">
+          <label for="fname" class="label">First Name</label>
+          <div class="control">
+            <input type="text" id="fname" class="input" v-model="fname" />
           </div>
-
-          <div class="field">
-            <label for="username" class="label">Username</label>
-            <div class="control">
-              <input type="text" id="username" class="input" v-model="username" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="password" class="label">Password</label>
-            <div class="control">
-              <input type="password" id="password" class="input" v-model="password" />
-            </div>
-          </div>
-          <div class="field">
-            <label for="confirmPassword" class="label">Confirm Password</label>
-            <div class="control">
-              <input type="password" id="confirmPassword" class="input" v-model="confirmPassword" />
-            </div>
-          </div>
-          <div class="field has-text-centered">
-            <button class="button is-primary" @click.prevent="signupUser">
-              <span class="icon">
-                <i class="fas fa-user-plus"></i>
-              </span>
-              &ensp; Register
-            </button>
-          </div>
-        </form>
-
-        <div class="has-text-centered">
-          <br /><RouterLink to="/login" class="has-text-info">
-            Already have an account? Click here to Login
-          </RouterLink>
         </div>
+        <div class="field">
+          <label for="lname" class="label">Last Name</label>
+          <div class="control">
+            <input type="text" id="lname" class="input" v-model="lname" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email" class="label">Email</label>
+          <div class="control">
+            <input type="email" id="email" class="input" v-model="email" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="username" class="label">Username</label>
+          <div class="control">
+            <input type="text" id="username" class="input" v-model="username" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password" class="label">Password</label>
+          <div class="control">
+            <input type="password" id="password" class="input" v-model="password" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="rePassword" class="label">Confirm Password</label>
+          <div class="control">
+            <input type="password" id="rePassword" class="input" v-model="rePassword" />
+          </div>
+        </div>
+        <div class="field has-text-centered">
+          <button class="button is-primary">
+            <!--@click.prevent="signupUser"-->
+            Register
+          </button>
+        </div>
+      </form>
+
+      <div style="text-align: center">
+        <p class="has-text-danger"><b>OR</b></p>
+        <RouterLink to="/signin" class="has-text-danger"> Sign In Instead </RouterLink>
       </div>
     </div>
   </div>
 </template>
-<style lang="css" scoped></style>
+
+<style scoped></style>

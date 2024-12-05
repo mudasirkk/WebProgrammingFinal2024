@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import CreateUser from '@/components/CreateUser.vue'
+import CreateUser from '../components/CreateUser.vue'
 </script>
 
 <template>

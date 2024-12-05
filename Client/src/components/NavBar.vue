@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { userAuth } from '@/models/authentication'
-import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
+import { userLogin, getSession } from '@/models/login'
 
 const isOpen = ref(false)
-const isUserSelectionOpen = ref(false)
-const { currUser, uLogout } = userAuth()
 
 const logOut = () => {
-  uLogout()
+  userLogin()
+}
+
+const session = getSession()
+
+const handleLogout = () => {
+  logOut()
 }
 </script>
 
@@ -36,27 +40,28 @@ const logOut = () => {
 
       <div id="navBarBasic" class="navbar-menu" :class="{ 'is-active': isOpen }">
         <div class="navbar-start">
-          <RouterLink to="/" class="navbar-item"> <i class="fas fa-home"></i> Home </RouterLink>
-          <RouterLink to="/statistics" class="navbar-item">
-            <i class="fas fa-dumbbell"></i> Statistics
+          <RouterLink to="/activity" class="navbar-item">
+            <i class="fas fa-running"></i> My Activity
           </RouterLink>
-          <RouterLink to="/friends" class="navbar-item"> Friends Activity </RouterLink>
-          <RouterLink to="/people" class="navbar-item"> People Search </RouterLink>
+          <RouterLink to="/friends" class="navbar-item"
+            ><i class="fas fa-users"></i> Friends Activity
+          </RouterLink>
+          <RouterLink to="/people" class="navbar-item"
+            ><i class="fas fa-search"></i> People Search
+          </RouterLink>
 
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> Admin </a>
-            <div class="navbar-dropdown">
-              <RouterLink to="/user" class="navbar-item"> Users </RouterLink>
-            </div>
+          <div class="navbar-dropdown">
+            <RouterLink v-if="session.user?.isAdmin" to="/user" class="navbar-item">
+              Admin
+            </RouterLink>
           </div>
         </div>
 
         <div class="navbar-end">
-          <RouterLink to="/signup" class="navbar-item">Sign Up</RouterLink>
-
-          <div class="navbar-item">
+          <RouterLink v-if="!session.user" to="/signup" class="navbar-item"> Signup </RouterLink>
+          <div v-if="!session.user" class="navbar-item">
             <div class="buttons">
-              <div class="dropdown is-active">
+              <div class="dropdown is-active" @mouseleave="isOpen = false">
                 <div class="dropdown-trigger">
                   <button
                     @click="isOpen = !isOpen"
@@ -76,11 +81,24 @@ const logOut = () => {
                     <a href="/statistics" class="dropdown-item">Mudasir Khan</a>
                     <a href="/statistics" class="dropdown-item">John Doe</a>
                     <a href="/statistics" class="dropdown-item">Jane Doe</a>
+                    <hr class="navbar-divider" />
+                    <a href="/signin" class="dropdown-item"> Other Account </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div v-else class="buttons">
+            <button class="button is-light" @click="handleLogout">Logout</button>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <a href="https://x.com/">
+            <button class="button">
+              <span class="icon"><i class="fab fa-twitter"></i></span>
+              <p>Tweet</p>
+            </button>
+          </a>
         </div>
       </div>
     </div>

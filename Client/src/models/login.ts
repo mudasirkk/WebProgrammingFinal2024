@@ -1,24 +1,22 @@
 import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import { api } from './myFetch'
 import type { DataEnvelope } from './dataEnvelope'
 import type { User } from './users'
 
+import { useRouter } from 'vue-router'
+import { api } from './myFetch'
+
 const sessionUser = reactive({
-  user: null as User | null,
-  token: null as string | null
+  user: JSON.parse(localStorage.getItem('user') || 'null') as User | null,
+  token: localStorage.getItem('token') as string | null
 })
 
-export const refSession = () => sessionUser
-
 export function userLogin() {
-  const router = useRouter()
   return {
     async login(email: string, password: string): Promise<boolean> {
-      const response = await api<DataEnvelope<{ user: User; token: string }>>(
-        `users/login/${email}/${password}`,
-        { email, password }
-      )
+      const response = await api<DataEnvelope<{ user: User; token: string }>>('users/signin', {
+        email,
+        password
+      })
 
       if (response.isSuccess) {
         sessionUser.user = response.data?.user || null
@@ -27,17 +25,23 @@ export function userLogin() {
         if (sessionUser.user == null || sessionUser.token == null) {
           return false
         }
-        router.push('/')
+
+        localStorage.setItem('user', JSON.stringify(sessionUser.user))
+        localStorage.setItem('token', sessionUser.token)
+
         return true
       } else {
-        console.error('Login failed')
+        console.error('Login Failed!')
         return false
       }
     },
     logout() {
       sessionUser.user = null
       sessionUser.token = null
-      router.push('/login')
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      const router = useRouter()
+      router.push('/signin')
     }
   }
 }
