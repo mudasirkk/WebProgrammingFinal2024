@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const userController = require("./controllers/users");
 const workoutController = require("./controllers/workouts");
+const { checkToken, checkAdmin } = require("./middleware/auth");
 
 const PORT = 3000;
 
@@ -21,7 +22,7 @@ app
   .get("/", (req, res, next) => {
     res.send("Hello World");
   })
-
+  .use(checkToken)
   .use("/api/v1/users", userController)
   .use("/api/v1/workouts", workoutController)
 

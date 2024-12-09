@@ -1,7 +1,7 @@
 const model = require("../models/users");
 const express = require("express");
 const app = express.Router();
-
+// Extend the Request type to include user and token properties
 /**
  * @typedef {import('express').Request} Request
  * @typedef {import('express').Response} Response
@@ -11,66 +11,58 @@ const app = express.Router();
 /**
  * @typedef {Request & { user?: any, token?: string }} CustomRequest
  */
-
 app
-  .get("/", (req, rest, next) => {
+  .get("/", (req, res, next) => {
     model
       .getAll()
-      .then((x) => rest.send(x))
+      .then((x) => res.send(x))
       .catch(next);
   })
 
-  .get("/:id", (req, rest, next) => {
+  .get("/:id", (req, res, next) => {
     const id = req.params.id;
     model
       .get(id)
-      .then((x) => rest.send(x))
+      .then((x) => res.send(x))
       .catch(next);
   })
 
-  .post("/", (req, rest, next) => {
+  .post("/", (req, res, next) => {
     model
       .add(req.body)
-      .then((x) => rest.send(x))
+      .then((x) => res.send(x))
       .catch(next);
   })
 
-  .post("/seed", (req, rest, next) => {
-    model
-      .seed()
-      .then((x) => rest.send(x))
-      .catch(next);
-  })
-
-  .post("/login", async (req, rest, next) => {
+  .post("/login", async (req, res, next) => {
     try {
       const { email, password } = req.body;
       const response = await model.login(email, password);
       if (response.isSuccess) {
         /** @type {CustomRequest} */ (req).user = response.data.user;
         /** @type {CustomRequest} */ (req).token = response.data.token;
-        rest.send(response);
+        res.send(response);
       } else {
-        rest.status(401).send(response.message);
+        res.status(401).send(response.message);
       }
     } catch (error) {
       next(error);
     }
   })
 
-  .patch("/:id", (req, rest, next) => {
+  .patch("/:id", (req, res, next) => {
     const id = req.params.id;
     model
       .update(+id, req.body)
-      .then((x) => rest.send(x))
+      .then((x) => res.send(x))
       .catch(next);
   })
 
-  .delete("/:id", (req, rest, next) => {
+  .delete("/:id", (req, res, next) => {
     const id = req.params.id;
     model
       .remove(+id)
-      .then((x) => rest.send(x))
+      .then((x) => res.send(x))
       .catch(next);
   });
 

@@ -5,7 +5,7 @@ const app = express.Router();
 app.get("/", (req, res, next) => {
   model
     .getAll()
-    .then((workouts) => res.send(workouts))
+    .then((x) => res.send(x))
     .catch(next);
 });
 
@@ -13,39 +13,40 @@ app.get("/:id", (req, res, next) => {
   const id = req.params.id;
   model
     .get(+id)
-    .then((workout) => res.send(workout))
+    .then((x) => res.send(x))
     .catch(next);
 });
 
-app.get("/user/:userid", (req, res, next) => {
-  const userid = req.params.userid;
-  model
-    .getByUser(+userid)
-    .then((workouts) => res.send(workouts))
-    .catch(next);
-});
+app
+  .get("/user/:userid", (req, res, next) => {
+    const userid = req.params.userid;
+    model
+      .getByUser(+userid)
+      .then((x) => res.send(x))
+      .catch(next);
+  })
 
-app.post("/", (req, res, next) => {
-  model
-    .add(req.body)
-    .then((newWorkout) => res.send(newWorkout))
-    .catch(next);
-});
+  .post("/", (req, res, next) => {
+    model
+      .add(req.body)
+      .then((x) => res.send(x))
+      .catch(next);
+  })
 
-app.patch("/:id", (req, res, next) => {
-  const id = req.params.id;
-  model
-    .update(+id, req.body)
-    .then((updatedWorkout) => res.send(updatedWorkout))
-    .catch(next);
-});
+  .patch("/:id", (req, res, next) => {
+    const id = req.params.id;
+    model
+      .update(+id, req.body)
+      .then((x) => res.send(x))
+      .catch(next);
+  })
 
-app.delete("/:id", (req, res, next) => {
-  const id = req.params.id;
-  model
-    .remove(+id)
-    .then((result) => res.send(result))
-    .catch(next);
-});
+  .delete("/:id", (req, res, next) => {
+    const id = req.params.id;
+    model
+      .remove(+id)
+      .then((x) => res.send(x))
+      .catch(next);
+  });
 
 module.exports = app;
