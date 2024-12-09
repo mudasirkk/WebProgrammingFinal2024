@@ -9,7 +9,17 @@ const logOut = () => {
   userLogin()
 }
 
-const session = getSession()
+//const session = getSession()
+
+const user = {
+  id: 3,
+  fname: 'Mudasir',
+  lname: 'Khan',
+  email: 'mudasir.khan@example.com',
+  username: 'mudasirkhan',
+  password: 'pass123',
+  isAdmin: true
+}
 
 const handleLogout = () => {
   logOut()
@@ -50,16 +60,18 @@ const handleLogout = () => {
             ><i class="fas fa-search"></i> People Search
           </RouterLink>
 
-          <div class="navbar-dropdown">
-            <RouterLink v-if="session.user?.isAdmin" to="/user" class="navbar-item">
-              Admin
-            </RouterLink>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"> Admin </a>
+
+            <div class="navbar-dropdown">
+              <RouterLink v-if="user.isAdmin" to="/user" class="navbar-item"> Users </RouterLink>
+            </div>
           </div>
         </div>
 
         <div class="navbar-end">
-          <RouterLink v-if="!session.user" to="/signup" class="navbar-item"> Signup </RouterLink>
-          <div v-if="!session.user" class="navbar-item">
+          <RouterLink v-if="!user" to="/signup" class="navbar-item"> Signup </RouterLink>
+          <div v-if="!user" class="navbar-item">
             <div class="buttons">
               <div class="dropdown is-active" @mouseleave="isOpen = false">
                 <div class="dropdown-trigger">

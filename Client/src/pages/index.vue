@@ -9,13 +9,23 @@ getAll().then((data) => {
   workouts.value = data.data
 })
 
-const session = getSession()
+//const session = getSession()
+
+const user = {
+  id: 3,
+  fname: 'Mudasir',
+  lname: 'Khan',
+  email: 'mudasir.khan@example.com',
+  username: 'mudasirkhan',
+  password: 'pass123',
+  isAdmin: true
+}
 </script>
 
 <template>
-  <div v-if="session.user">
+  <div v-if="user">
     <div class="container">
-      <h1 class="title">Its good to see you {{ session.user.fname }}</h1>
+      <h1 class="title">Its good to see you {{ user.fname }} {{ user.lname }}</h1>
       <h1 class="title">Your Workouts</h1>
     </div>
     <div class="container">
