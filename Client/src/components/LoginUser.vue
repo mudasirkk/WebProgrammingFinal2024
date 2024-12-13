@@ -1,60 +1,63 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { userLogin } from '../models/login'
 
 const email = ref('')
 const password = ref('')
-const errorMessage = ref('')
 
 const router = useRouter()
-const { login } = userLogin()
-/*
-const handleSignin = async (e: Event) => {
-  e.preventDefault()
-  try {
-    const success = await login(email.value, password.value)
-    if (success) {
-      router.push({ name: '/' })
-    } else {
-      errorMessage.value = 'Invalid email or password.'
-    }
-  } catch (error) {
-    errorMessage.value = 'An error occurred during login: Invalid email or password.'
-    console.error('Login failed:', error)
-  }
-}*/
+
+const handleSubmit = () => {
+  // Handle login logic here
+  console.log({
+    email: email.value,
+    password: password.value
+  })
+
+  // You can reset the fields after submission if needed
+  email.value = ''
+  password.value = ''
+}
 </script>
 
 <template>
   <div class="columns is-centered">
     <div class="column is-half">
-      <form class="box has-background-light">
-        <!--@submit="handleSignin"-->
-        <p class="title is-1">Sign In</p>
+      <p class="title is-1 has-text-centered">Sign In</p>
 
+      <form @submit.prevent="handleSubmit" class="box has-background-light">
         <div class="field">
-          <label for="email" class="label">Email</label>
+          <label class="label">Email</label>
           <div class="control">
-            <input type="email" class="input" v-model="email" required />
+            <input
+              class="input"
+              type="text"
+              v-model="email"
+              placeholder="john.doe@example.com"
+              required
+            />
           </div>
         </div>
 
         <div class="field">
-          <label for="password" class="label">Password</label>
+          <label class="label">Password</label>
           <div class="control">
-            <input type="password" class="input" v-model="password" required />
+            <input
+              type="password"
+              class="input"
+              v-model="password"
+              placeholder="pass123"
+              required
+            />
           </div>
         </div>
 
-        <div class="field" style="text-align: center">
+        <div class="field has-text-centered">
           <button class="button is-primary" type="submit">Login</button>
-          <p v-if="errorMessage" class="has-text-warning">{{ errorMessage }}</p>
         </div>
       </form>
       <div class="has-text-centered">
-        <p class="has-text-danger"><b>OR</b></p>
-        <RouterLink to="/signup" class="has-text-danger"> Register a new account </RouterLink>
+        <p class="has-text-danger"><b>OR</b><RouterLink to="/signup"> Register </RouterLink></p>
       </div>
     </div>
   </div>

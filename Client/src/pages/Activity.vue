@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { getSession } from '@/models/login'
 import { ref } from 'vue'
 
-//const session = getSession()
 const user = {
   id: 3,
   fname: 'Mudasir',

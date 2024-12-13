@@ -2,26 +2,18 @@ const model = require("../models/workouts");
 const express = require("express");
 const app = express.Router();
 
-app.get("/", (req, res, next) => {
-  model
-    .getAll()
-    .then((x) => res.send(x))
-    .catch(next);
-});
-
-app.get("/:id", (req, res, next) => {
-  const id = req.params.id;
-  model
-    .get(+id)
-    .then((x) => res.send(x))
-    .catch(next);
-});
-
 app
-  .get("/user/:userid", (req, res, next) => {
-    const userid = req.params.userid;
+  .get("/", (req, res, next) => {
     model
-      .getByUser(+userid)
+      .getAll()
+      .then((x) => res.send(x))
+      .catch(next);
+  })
+
+  .get("/:id", (req, res, next) => {
+    const id = req.params.id;
+    model
+      .get(+id)
       .then((x) => res.send(x))
       .catch(next);
   })
@@ -45,6 +37,13 @@ app
     const id = req.params.id;
     model
       .remove(+id)
+      .then((x) => res.send(x))
+      .catch(next);
+  })
+
+  .post("/seed", (req, res, next) => {
+    model
+      .seed()
       .then((x) => res.send(x))
       .catch(next);
   });

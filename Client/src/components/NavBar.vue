@@ -64,14 +64,14 @@ const handleLogout = () => {
             <a class="navbar-link"> Admin </a>
 
             <div class="navbar-dropdown">
-              <RouterLink v-if="user.isAdmin" to="/user" class="navbar-item"> Users </RouterLink>
+              <RouterLink v-if="!user.isAdmin" to="/user" class="navbar-item"> Users </RouterLink>
             </div>
           </div>
         </div>
 
         <div class="navbar-end">
-          <RouterLink v-if="!user" to="/signup" class="navbar-item"> Signup </RouterLink>
-          <div v-if="!user" class="navbar-item">
+          <RouterLink v-if="user" to="/signup" class="navbar-item"> Signup </RouterLink>
+          <div v-if="user" class="navbar-item">
             <div class="buttons">
               <div class="dropdown is-active" @mouseleave="isOpen = false">
                 <div class="dropdown-trigger">

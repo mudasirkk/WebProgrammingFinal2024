@@ -1,7 +1,19 @@
 <script setup lang="ts">
+import { getAll, type User } from '@/models/users'
 import type { Workout } from '../models/workouts'
+import { computed, ref, type Ref } from 'vue'
 
-defineProps<{ workout: Workout }>()
+const props = defineProps<{
+  workout: Workout
+}>()
+const user = ref<User[]>([])
+getAll().then((data) => {
+  if (data.isSuccess) {
+    user.value = data.data
+  } else {
+    console.error(data.message)
+  }
+})
 </script>
 
 <template>

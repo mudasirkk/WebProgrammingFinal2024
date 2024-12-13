@@ -1,4 +1,4 @@
-import type { DataListEnvelope, DataEnvelope } from './dataEnvelope'
+import type { DataEnvelope, DataListEnvelope } from './dataEnvelope'
 import { api } from './myFetch'
 
 export async function getAll() {

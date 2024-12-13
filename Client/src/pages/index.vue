@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { getAll, type Workout } from '@/models/workouts'
-import { getSession } from '@/models/login'
 import WorkoutCard from '@/components/WorkoutCard.vue'
 
 const workouts = ref<Workout[]>([])

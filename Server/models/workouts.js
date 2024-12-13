@@ -1,6 +1,24 @@
+const path = require("path");
+const filePath = path.join(__dirname, "../data/workouts.json");
+
 const { getConnection } = require("./supabase");
 const conn = getConnection();
+const data = { items: require(filePath).workouts };
 
+/**
+ * @template T
+ * @typedef {import("../../Client/src/models/dataEnvelope").DataEnvelope} DataEnvelope
+ * @typedef {import("../../Client/src/models/dataEnvelope").DataListEnvelope} DataListEnvelope
+ */
+
+/**
+ * @typedef {import("../../Client/src/models/workouts").Workout} Workout
+ */
+
+/**
+ * Get all workouts
+ * @returns {Promise<DataListEnvelope<Workout>>}
+ */
 async function getAll() {
   const { data, error, count } = await conn
     .from("workouts")
@@ -13,6 +31,11 @@ async function getAll() {
   };
 }
 
+/**
+ * Get a workout by id
+ * @param {number} id
+ * @returns {Promise<DataEnvelope<Workout>>}
+ */
 async function get(id) {
   const { data, error } = await conn
     .from("workouts")
@@ -26,6 +49,11 @@ async function get(id) {
   };
 }
 
+/**
+ * Add a new workout
+ * @param {Workout} workout
+ * @returns {Promise<DataEnvelope<Workout>>}
+ */
 async function add(workout) {
   const { data, error } = await conn
     .from("workouts")
@@ -50,6 +78,12 @@ async function add(workout) {
   };
 }
 
+/**
+ * Update a workout
+ * @param {number} id
+ * @param {Workout} updatedWorkout
+ * @returns {Promise<DataEnvelope<Workout>>}
+ */
 async function update(id, updatedWorkout) {
   const { data, error } = await conn
     .from("workouts")
@@ -73,6 +107,11 @@ async function update(id, updatedWorkout) {
   };
 }
 
+/**
+ * Remove a workout
+ * @param {number} id
+ * @returns {Promise<DataEnvelope<number>>}
+ */
 async function remove(id) {
   const { data, error } = await conn
     .from("workouts")
@@ -87,16 +126,11 @@ async function remove(id) {
   };
 }
 
-async function getByUser(userid) {
-  const { data, error, count } = await conn
-    .from("workouts")
-    .select("*")
-    .eq("userid", userid);
-  return {
-    isSuccess: !error,
-    message: error?.message,
-    data: data,
-  };
+async function seed() {
+  for (const Workout of data.items) {
+    console.log(Workout);
+    await add(Workout);
+  }
 }
 
 module.exports = {
@@ -105,5 +139,5 @@ module.exports = {
   add,
   update,
   remove,
-  getByUser,
+  seed,
 };
