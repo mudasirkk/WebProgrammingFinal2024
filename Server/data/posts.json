@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "workoutType": "Cardio",
+      "description": "Completed a 5km run this morning at a steady pace.",
+      "date": "2024-11-01",
+      "location": "Central Park",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "workoutType": "Yoga",
+      "description": "Tried a new yoga routine focusing on mindfulness and flexibility.",
+      "date": "2024-11-02",
+      "location": "Fitness Studio",
+      "userId": 2
+    },
+    {
+      "id": 3,
+      "workoutType": "Strength",
+      "description": "Worked on upper body strength with bench presses and pull-ups.",
+      "date": "2024-11-01",
+      "location": "Gym",
+      "userId": 3
+    },
+    {
+      "id": 4,
+      "workoutType": "Cardio",
+      "description": "Explored the countryside trail on my bike, beautiful weather today.",
+      "date": "2024-11-03",
+      "location": "Countryside Trail",
+      "userId": 4
+    },
+    {
+      "id": 5,
+      "workoutType": "HIIT",
+      "description": "Did an intense HIIT session with burpees, squats, and mountain climbers.",
+      "date": "2024-11-02",
+      "location": "Home",
+      "userId": 5
+    }
+  ]
+}

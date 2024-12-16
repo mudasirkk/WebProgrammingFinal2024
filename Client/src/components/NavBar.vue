@@ -1,29 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
-import { userLogin, getSession } from '@/models/login'
 
 const isOpen = ref(false)
-
-const logOut = () => {
-  userLogin()
-}
-
-//const session = getSession()
-
-const user = {
-  id: 3,
-  fname: 'Mudasir',
-  lname: 'Khan',
-  email: 'mudasir.khan@example.com',
-  username: 'mudasirkhan',
-  password: 'pass123',
-  isAdmin: true
-}
-
-const handleLogout = () => {
-  logOut()
-}
 </script>
 
 <template>
@@ -64,14 +43,14 @@ const handleLogout = () => {
             <a class="navbar-link"> Admin </a>
 
             <div class="navbar-dropdown">
-              <RouterLink v-if="!user.isAdmin" to="/user" class="navbar-item"> Users </RouterLink>
+              <RouterLink to="/user" class="navbar-item"> Users </RouterLink>
             </div>
           </div>
         </div>
 
         <div class="navbar-end">
-          <RouterLink v-if="user" to="/signup" class="navbar-item"> Signup </RouterLink>
-          <div v-if="user" class="navbar-item">
+          <RouterLink to="/signup" class="navbar-item"> Signup </RouterLink>
+          <div class="navbar-item">
             <div class="buttons">
               <div class="dropdown is-active" @mouseleave="isOpen = false">
                 <div class="dropdown-trigger">
@@ -100,8 +79,8 @@ const handleLogout = () => {
               </div>
             </div>
           </div>
-          <div v-else class="buttons">
-            <button class="button is-light" @click="handleLogout">Logout</button>
+          <div class="buttons">
+            <button class="button is-light">Logout</button>
           </div>
         </div>
         <div class="navbar-item">

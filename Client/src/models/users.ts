@@ -4,7 +4,7 @@ import { api } from './myFetch'
 export async function getAll() {
   return api<DataListEnvelope<User>>('users')
 }
-export async function getByID(id: number) {
+export async function get(id: number) {
   return api<DataEnvelope<User>>(`users/${id}`)
 }
 
@@ -21,7 +21,7 @@ export async function remove(id: number) {
 }
 
 export interface User {
-  id: number
+  id?: number
   fname: string
   lname: string
   email: string

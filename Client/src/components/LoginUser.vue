@@ -1,23 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { type User, get, getAll } from '@/models/users'
+import { refSession, useLogin } from '@/models/session'
 
-const email = ref('')
-const password = ref('')
-
+const session = refSession()
+const users = ref<User[]>([])
 const router = useRouter()
+const { login, logout } = useLogin()
 
-const handleSubmit = () => {
-  // Handle login logic here
-  console.log({
-    email: email.value,
-    password: password.value
-  })
-
-  // You can reset the fields after submission if needed
-  email.value = ''
-  password.value = ''
-}
+getAll().then((data) => {
+  users.value = data.data
+})
 </script>
 
 <template>
@@ -25,30 +19,18 @@ const handleSubmit = () => {
     <div class="column is-half">
       <p class="title is-1 has-text-centered">Sign In</p>
 
-      <form @submit.prevent="handleSubmit" class="box has-background-light">
+      <form @submit.prevent="" class="box has-background-light">
         <div class="field">
           <label class="label">Email</label>
           <div class="control">
-            <input
-              class="input"
-              type="text"
-              v-model="email"
-              placeholder="john.doe@example.com"
-              required
-            />
+            <input class="input" type="text" placeholder="john.doe@example.com" required />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Password</label>
           <div class="control">
-            <input
-              type="password"
-              class="input"
-              v-model="password"
-              placeholder="pass123"
-              required
-            />
+            <input type="password" class="input" placeholder="pass123" required />
           </div>
         </div>
 

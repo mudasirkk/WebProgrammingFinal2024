@@ -7,7 +7,12 @@ export function rest<T>(url: string, data?: any, method?: string): Promise<T> {
       'Content-Type': 'application/json'
     },
     body: data ? JSON.stringify(data) : undefined
-  }).then((x) => x.json())
+  }).then((x) => {
+    if (!x.ok) {
+      throw new Error(`HTTP error! Status: ${x.status}`)
+    }
+    return x.json()
+  })
 }
 
 export function api<T>(url: string, data?: any, method?: string): Promise<T> {
