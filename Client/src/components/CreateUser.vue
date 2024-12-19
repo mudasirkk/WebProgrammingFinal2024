@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
+import { type User, add, getAll } from '@/models/users'
 
 const fname = ref('')
 const lname = ref('')
@@ -11,24 +12,29 @@ const confirmPassword = ref('')
 
 const router = useRouter()
 
-const handleSubmit = () => {
-  // Handle form submission logic here
-  console.log({
+const createUser = async () => {
+  if (password.value !== confirmPassword.value || password.value === '') {
+    alert('Passwords do not match')
+    return
+  } else if ((await getAll()).data.some((user: User) => user.email === email.value)) {
+    alert('Email already in use')
+    return
+  }
+
+  const newUser: User = {
     fname: fname.value,
     lname: lname.value,
-    email: email.value,
     username: username.value,
+    email: email.value,
     password: password.value,
-    confirmPassword: confirmPassword.value
-  })
-
-  // You can reset the fields after submission if needed
-  fname.value = ''
-  lname.value = ''
-  email.value = ''
-  username.value = ''
-  password.value = ''
-  confirmPassword.value = ''
+    isAdmin: false
+  }
+  try {
+    await add(newUser)
+    router.push('/signin')
+  } catch (error) {
+    console.error('An error occurred')
+  }
 }
 </script>
 
@@ -36,73 +42,38 @@ const handleSubmit = () => {
   <div class="columns is-centered">
     <div class="column is-half">
       <p class="title is-1 has-text-centered" style="padding-top: 1rem">Sign Up</p>
-      <form @submit.prevent="handleSubmit" class="box has-background-light">
+      <form @submit.prevent="createUser" class="box">
         <div class="field">
           <label class="label">First Name</label>
           <div class="control">
-            <input
-              class="input"
-              type="text"
-              id="fname"
-              v-model="fname"
-              placeholder="John"
-              required
-            />
+            <input class="input" type="text" id="fname" v-model="fname" required />
           </div>
         </div>
         <div class="field">
           <label class="label">Last Name</label>
           <div class="control">
-            <input
-              type="text"
-              id="lname"
-              class="input"
-              v-model="lname"
-              placeholder="Doe"
-              required
-            />
+            <input type="text" id="lname" class="input" v-model="lname" required />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Email</label>
           <div class="control">
-            <input
-              type="email"
-              id="email"
-              class="input"
-              v-model="email"
-              placeholder="john.doe@example.com"
-              required
-            />
+            <input type="email" id="email" class="input" v-model="email" required />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Username</label>
           <div class="control">
-            <input
-              type="text"
-              id="username"
-              class="input"
-              v-model="username"
-              placeholder="johndoe"
-              required
-            />
+            <input type="text" id="username" class="input" v-model="username" required />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Password</label>
           <div class="control">
-            <input
-              type="password"
-              id="password"
-              class="input"
-              v-model="password"
-              placeholder="pass123"
-              required
-            />
+            <input type="password" id="password" class="input" v-model="password" required />
           </div>
         </div>
         <div class="field">
@@ -113,7 +84,6 @@ const handleSubmit = () => {
               id="confirmPassword"
               class="input"
               v-model="confirmPassword"
-              placeholder="pass123"
               required
             />
           </div>

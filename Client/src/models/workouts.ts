@@ -25,7 +25,7 @@ export function remove(id: number) {
   return api<DataEnvelope<Workout>>(`workouts/${id}`, undefined, 'DELETE')
 }
 export interface Workout {
-  id: number
+  id?: number
   userid: number
   title: string
   date: string

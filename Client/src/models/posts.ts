@@ -5,8 +5,12 @@ export async function getAll() {
   return api<DataListEnvelope<Post>>('posts')
 }
 
-export async function getById(id: number) {
+export async function get(id: number) {
   return api<DataEnvelope<Post>>(`posts/${id}`)
+}
+
+export async function getByUser(userid: number) {
+  return api<DataListEnvelope<Post>>(`posts/userpost/${userid}`)
 }
 
 export function create(post: Post) {

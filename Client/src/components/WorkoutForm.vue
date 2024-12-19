@@ -1,25 +1,30 @@
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { add, type Workout } from '@/models/workouts'
+import { refSession } from '@/models/users'
 
-const currUser = ref(window.currUser)
-const emit = defineEmits(['addworkout', 'close'])
+const session = refSession()
+const router = useRouter()
 
-const userid = ref(0)
-const username = ref('')
-const description = ref('')
+const user = session.user
+const isOpen = ref<boolean>(false)
+
+const userid = user?.id ?? 0
 const title = ref('')
 const date = ref('')
 const duration = ref(0)
 const location = ref('')
 const type = ref('')
 
-const submitForm = async () => {
+const submitWorkout = () => {
+  if (!session.user) {
+    alert('User is not logged in')
+    return
+  }
+
   const newWorkout: Workout = {
-    id: workouts.value.length + 1,
-    userid: currUser.value.id,
-    username: username.value,
-    description: description.value,
+    userid: userid,
     title: title.value,
     date: date.value,
     duration: duration.value,
@@ -27,90 +32,54 @@ const submitForm = async () => {
     type: type.value
   }
 
-  try {
-    console.log('Submitting new workout:', newWorkout) // Add logging
-    await create(newWorkout)
-    emit('add-workout', newWorkout) // Emit the new workout to parent component
-    close() // Close the form after submission
-  } catch (error) {
-    console.error('Failed to add workout:', error)
-  }
-}
-
-// Function to close the form
-const close = () => {
-  title.value = ''
-  date.value = ''
-  duration.value = 0
-  location.value = ''
-  type.value = ''
-  emit('close') // Emit close event to notify the parent component
+  add(newWorkout)
+  router.push('/workout')
+  isOpen.value = false
 }
 </script>
 
 <template>
-  <div class="modal is-active">
-    <div class="modal-background" @click="close"></div>
+  <div class="content">
+    <button class="button" @click="isOpen = true">Create Workout</button>
+  </div>
+  <div class="modal" :class="{ 'is-active': isOpen }">
+    <div class="modal-background" @click="isOpen = false"></div>
     <div class="modal-content">
       <div class="box">
         <h2 class="title">Add New Workout</h2>
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitWorkout">
           <div class="field">
             <label class="label">Title</label>
             <div class="control">
-              <input
-                v-model="title"
-                class="input"
-                type="text"
-                placeholder="Enter workout title"
-                required
-              />
+              <input v-model="title" class="input" type="text" required />
             </div>
           </div>
 
           <div class="field">
             <label class="label">Date (mm/dd/yyyy)</label>
             <div class="control">
-              <input v-model="date" class="input" type="text" placeholder="MM/DD/YYYY" required />
+              <input v-model="date" class="input" type="text" required />
             </div>
           </div>
 
           <div class="field">
             <label class="label">Duration (minutes)</label>
             <div class="control">
-              <input
-                v-model="duration"
-                class="input"
-                type="number"
-                placeholder="Enter duration"
-                required
-              />
+              <input v-model="duration" class="input" type="number" required />
             </div>
           </div>
 
           <div class="field">
             <label class="label">Location</label>
             <div class="control">
-              <input
-                v-model="location"
-                class="input"
-                type="text"
-                placeholder="Enter location"
-                required
-              />
+              <input v-model="location" class="input" type="text" required />
             </div>
           </div>
 
           <div class="field">
             <label class="label">Type</label>
             <div class="control">
-              <input
-                v-model="type"
-                class="input"
-                type="text"
-                placeholder="Enter workout type"
-                required
-              />
+              <input v-model="type" class="input" type="text" required />
             </div>
           </div>
 
@@ -119,7 +88,7 @@ const close = () => {
               <button class="button is-primary" type="submit">Add Workout</button>
             </div>
             <div class="control">
-              <button class="button" type="button" @click="close">Cancel</button>
+              <button class="button" type="button" @click="isOpen = false">Cancel</button>
             </div>
           </div>
         </form>

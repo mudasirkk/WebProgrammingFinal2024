@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { type Workout, remove } from '@/models/workouts'
+import WorkoutForm from './WorkoutForm.vue'
 
 const props = defineProps<{
   workout: Workout
