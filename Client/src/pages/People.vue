@@ -18,9 +18,9 @@ export default {
 
       try {
         const response = await search(query)
-        options.value = response.data.data.map((user: User) => ({
-          value: user.fname, // User object
-          label: user.username // Display username in autocomplete
+        options.value = response.data.map((user: User) => ({
+          value: user, // User object
+          label: user.fname // Display username in autocomplete
         }))
       } catch (error) {
         console.error('Error fetching data:', error)
@@ -56,9 +56,7 @@ export default {
             placeholder="User to Find"
             icon="search"
             clearable
-            open-on-focus
           >
-            > >
             <template #empty>No results found</template>
           </o-autocomplete>
         </o-field>
