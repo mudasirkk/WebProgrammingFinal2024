@@ -26,7 +26,7 @@ const handleDelete = async (workoutId: number) => {
     <h1><span class="has-text-warning">Duration:</span> {{ workout.duration }} Minutes</h1>
     <h1><span class="has-text-warning">Location:</span> {{ workout.location }}</h1>
     <h1><span class="has-text-warning">UserID:</span> {{ workout.userid }}</h1>
-    <div class="buttons">
+    <div v-if="workout.id != undefined" class="buttons">
       <button class="button is-danger" @click="handleDelete(workout.id)">Delete</button>
     </div>
   </div>
