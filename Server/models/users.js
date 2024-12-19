@@ -32,6 +32,27 @@ async function getAll() {
   };
 }
 
+async function search(query) {
+  const { data, error, count } = await conn
+    .from("users")
+    .select("*", { count: "estimated" })
+    .ilike("fname", `%${query}%`);
+  if (data?.length === 0) {
+    return {
+      isSuccess: true,
+      message: "No results found",
+      data: [],
+      total: 0,
+    };
+  }
+  return {
+    isSuccess: !error,
+    message: error?.message,
+    data: data,
+    total: count,
+  };
+}
+
 /**
  * Get a user by id
  * @param {number} id
@@ -180,5 +201,6 @@ module.exports = {
   update,
   remove,
   login,
+  search,
   seed,
 };

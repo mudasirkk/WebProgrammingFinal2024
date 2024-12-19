@@ -11,6 +11,9 @@ importers:
       '@fortawesome/fontawesome-free':
         specifier: ^5.15.4
         version: 5.15.4
+      '@oruga-ui/oruga-next':
+        specifier: ^0.9.3
+        version: 0.9.3(vue@3.5.12(typescript@5.5.4))
       bulma:
         specifier: ^1.0.2
         version: 1.0.2
@@ -467,6 +470,11 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@oruga-ui/oruga-next@0.9.3':
+    resolution: {integrity: sha512-XTO8tz9h62j+MQzW1oIsezxlToSMjOKvpSzzqpuxsDYa0x1MioESiBuwRcQVw8RfnKxmRLIPGyJCmWBJgICvWg==}
+    peerDependencies:
+      vue: ^3.0.0
 
   '@pkgr/core@0.1.1':
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
@@ -1804,6 +1812,9 @@ packages:
   vscode-uri@3.0.8:
     resolution: {integrity: sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==}
 
+  vue-component-type-helpers@2.1.10:
+    resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
+
   vue-eslint-parser@9.4.3:
     resolution: {integrity: sha512-2rYRLWlIpaiN8xbPiDyXZXRgLGOtWxERV7ND5fFAv5qo1D2N9Fu9MNajBNc6o13lZ+24DAWCkQCvj4klgmcITg==}
     engines: {node: ^14.17.0 || >=16.0.0}
@@ -2239,6 +2250,11 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
+
+  '@oruga-ui/oruga-next@0.9.3(vue@3.5.12(typescript@5.5.4))':
+    dependencies:
+      vue: 3.5.12(typescript@5.5.4)
+      vue-component-type-helpers: 2.1.10
 
   '@pkgr/core@0.1.1': {}
 
@@ -3577,6 +3593,8 @@ snapshots:
       sass-embedded: 1.80.5
 
   vscode-uri@3.0.8: {}
+
+  vue-component-type-helpers@2.1.10: {}
 
   vue-eslint-parser@9.4.3(eslint@9.13.0):
     dependencies:
