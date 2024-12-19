@@ -1,17 +1,29 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { type User, get, getAll } from '@/models/users'
-import { refSession, useLogin } from '@/models/session'
+import { type User, get, getAll, refSession, useLogin } from '@/models/users'
 
-const session = refSession()
-const users = ref<User[]>([])
 const router = useRouter()
-const { login, logout } = useLogin()
+const { login } = useLogin()
+const email = ref('')
+const password = ref('')
+const errormsg = ref('')
 
-getAll().then((data) => {
-  users.value = data.data
-})
+const handleLogin = async (event: Event) => {
+  event.preventDefault()
+  try {
+    const isloggedIn = await login(email.value, password.value)
+    console.log(isloggedIn)
+    if (isloggedIn) {
+      router.push({ name: '/' })
+    } else {
+      errormsg.value = 'Login failed. Invalid credentials'
+    }
+  } catch (error) {
+    errormsg.value = 'An error occurred. Please try again'
+    console.error(error)
+  }
+}
 </script>
 
 <template>
@@ -19,18 +31,19 @@ getAll().then((data) => {
     <div class="column is-half">
       <p class="title is-1 has-text-centered">Sign In</p>
 
-      <form @submit.prevent="" class="box has-background-light">
+      <form @submit.prevent="handleLogin" class="box has-background-light">
+        <p v-if="errormsg" class="has-text-warning">{{ errormsg }}</p>
         <div class="field">
-          <label class="label">Email</label>
+          <label for="email" class="label">Email</label>
           <div class="control">
-            <input class="input" type="text" placeholder="john.doe@example.com" required />
+            <input class="input" type="email" v-model="email" required />
           </div>
         </div>
 
         <div class="field">
-          <label class="label">Password</label>
+          <label for="password" class="label">Password</label>
           <div class="control">
-            <input type="password" class="input" placeholder="pass123" required />
+            <input type="password" class="input" v-model="password" required />
           </div>
         </div>
 

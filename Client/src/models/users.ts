@@ -1,6 +1,7 @@
+import { useRouter } from 'vue-router'
 import type { DataEnvelope, DataListEnvelope } from './dataEnvelope'
 import { api } from './myFetch'
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
 export async function getAll() {
   return api<DataListEnvelope<User>>('users')
@@ -32,29 +33,42 @@ export interface User {
   isAdmin: boolean
 }
 
-const session = ref({
-  user: null as User | null,
-  message: '',
+const router = useRouter()
+
+const session = reactive({
+  user: JSON.parse(localStorage.getItem('user') || 'null') as User | null,
   isLoading: false
 })
 
 export const refSession = () => session
 
-export async function login(email: string, password: string) {
-  try {
-    const response = await api<DataEnvelope<{ user: User }>>('users/login', { email, password })
-    if (response.isSuccess) {
-      session.value.user = response.data?.user || null
-      return response.data?.user
-    } else {
-      console.error(`Login failed: ${response.message}`)
-    }
-  } catch (error) {
-    console.error(`Login failed: ${error}`)
-  }
-  return undefined
+export function getSession() {
+  return session
 }
 
-export function logout() {
-  session.value.user = null
+export function useLogin() {
+  return {
+    async login(email: string, password: string): Promise<boolean> {
+      const response = await api<DataEnvelope<User>>('users/login', { email, password })
+      console.log('API Response:', response)
+      if (response.isSuccess) {
+        session.user = response.data || null
+        console.log(session.user)
+        if (session.user == null) {
+          console.error('Login failed: User not found')
+          return false
+        }
+        localStorage.setItem('user', JSON.stringify(session.user))
+        return true
+      } else {
+        console.error(`Login failed: ${response.message}`)
+        return false
+      }
+    },
+    logout() {
+      session.user = null
+      localStorage.removeItem('user')
+      router.push('/signin')
+    }
+  }
 }

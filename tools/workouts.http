@@ -120,8 +120,8 @@ POST http://localhost:3000/api/v1/users/login
 Content-Type: application/json
 
 {
-     "email": "john.smith@example.com",
-      "password": "newpassword123"
+     "email": "jane.doe@example.com",
+      "password": "password456"
 }
 ###
 
@@ -142,7 +142,7 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:3000/api/v1/users/2
+DELETE http://localhost:3000/api/v1/users/3
 ###
 
 
@@ -150,4 +150,8 @@ POST http://localhost:3000/api/v1/users/seed
 ###
 
 POST http://localhost:3000/api/v1/workouts/seed
+###
+
+
+POST http://localhost:3000/api/v1/posts/seed
 ###

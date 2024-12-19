@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
+import { refSession, useLogin } from '@/models/users'
 
 const isOpen = ref(false)
+const session = refSession()
+const { logout } = useLogin()
+
+const handleLogout = () => {
+  logout()
+}
 </script>
 
 <template>
@@ -27,60 +34,60 @@ const isOpen = ref(false)
         </a>
       </div>
 
-      <div id="navBarBasic" class="navbar-menu" :class="{ 'is-active': isOpen }">
-        <div class="navbar-start">
+      <div
+        id="navBarBasic"
+        class="navbar-menu"
+        :class="{ 'is-active': isOpen }"
+        @click="isOpen = !isOpen"
+      >
+        <RouterLink to="/" class="navbar-item">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+          Home
+        </RouterLink>
+        <div v-if="session.user != null" class="navbar-start">
           <RouterLink to="/activity" class="navbar-item">
-            <i class="fas fa-running"></i> My Activity
+            <i class="fas fa-running"></i> My Workout
           </RouterLink>
           <RouterLink to="/friends" class="navbar-item"
-            ><i class="fas fa-users"></i> Friends Activity
+            ><i class="fas fa-users"></i> Activity
           </RouterLink>
           <RouterLink to="/people" class="navbar-item"
             ><i class="fas fa-search"></i> People Search
           </RouterLink>
 
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> Admin </a>
-
-            <div class="navbar-dropdown">
-              <RouterLink to="/user" class="navbar-item"> Users </RouterLink>
-            </div>
-          </div>
+          <RouterLink v-if="session.user.isAdmin" to="/admin" class="navbar-item">Admin</RouterLink>
         </div>
 
         <div class="navbar-end">
-          <RouterLink to="/signup" class="navbar-item"> Signup </RouterLink>
           <div class="navbar-item">
             <div class="buttons">
-              <div class="dropdown is-active" @mouseleave="isOpen = false">
-                <div class="dropdown-trigger">
-                  <button
-                    @click="isOpen = !isOpen"
-                    class="button"
-                    aria-haspopup="true"
-                    aria-controls="dropdown-menu"
-                  >
-                    <span>Log in</span>
-                    <span class="icon is-small">
-                      <i class="fas fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                  </button>
-                </div>
-
-                <div class="dropdown-menu" role="menu" v-show="isOpen">
-                  <div class="dropdown-content">
-                    <a href="/statistics" class="dropdown-item">Mudasir Khan</a>
-                    <a href="/statistics" class="dropdown-item">John Doe</a>
-                    <a href="/statistics" class="dropdown-item">Jane Doe</a>
-                    <hr class="navbar-divider" />
-                    <a href="/signin" class="dropdown-item"> Other Account </a>
-                  </div>
-                </div>
-              </div>
+              <RouterLink
+                v-if="!session.user"
+                to="/signup"
+                class="navbar-item"
+                style="background-color: grey; color: white"
+              >
+                Signup
+              </RouterLink>
+              <RouterLink
+                v-if="!session.user"
+                to="/signin"
+                class="navbar-item"
+                style="background-color: grey; color: white"
+              >
+                Sign In
+              </RouterLink>
+              <button
+                v-else
+                class="button"
+                style="background-color: grey; color: white"
+                @click="handleLogout"
+              >
+                Logout
+              </button>
             </div>
-          </div>
-          <div class="buttons">
-            <button class="button is-light">Logout</button>
           </div>
         </div>
         <div class="navbar-item">
@@ -96,4 +103,9 @@ const isOpen = ref(false)
   </nav>
 </template>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.router-link-active {
+  border-bottom: 5px solid gold;
+  font-weight: bold;
+}
+</style>
