@@ -1,10 +1,8 @@
 {
-  "workouts": [
+  "items": [
     {
       "id": 1,
       "userid": 1,
-      "username": "johndoe",
-      "description": "Morning run along the park trail.",
       "title": "Park Run",
       "date": "2024-11-01",
       "duration": 30,
@@ -14,8 +12,6 @@
     {
       "id": 2,
       "userid": 2,
-      "username": "janesmith",
-      "description": "Yoga session focusing on flexibility and relaxation.",
       "title": "Evening Yoga",
       "date": "2024-11-02",
       "duration": 60,
@@ -25,8 +21,6 @@
     {
       "id": 3,
       "userid": 3,
-      "username": "mudasirkhan",
-      "description": "Strength training focusing on upper body.",
       "title": "Upper Body Strength",
       "date": "2024-11-01",
       "duration": 45,
@@ -36,8 +30,6 @@
     {
       "id": 4,
       "userid": 4,
-      "username": "bobbrown",
-      "description": "Afternoon cycling session.",
       "title": "Cycling",
       "date": "2024-11-03",
       "duration": 60,
@@ -47,8 +39,6 @@
     {
       "id": 5,
       "userid": 5,
-      "username": "charliedavis",
-      "description": "High-intensity interval training session.",
       "title": "HIIT Workout",
       "date": "2024-11-02",
       "duration": 30,

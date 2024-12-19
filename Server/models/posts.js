@@ -1,3 +1,4 @@
+/** @type {{ items: Post[] }} */
 const data = require("../data/posts.json");
 const { getConnection } = require("./supabase");
 

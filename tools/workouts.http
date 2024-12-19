@@ -81,7 +81,7 @@ GET http://localhost:3000/api/v1/workouts/userworkout/1
 
 //Check Users
 ###
-GET http://localhost:3000/api/v1/users/
+GET http://localhost:3000/api/v1/users
 ###
 
 POST http://localhost:3000/api/v1/users
@@ -142,9 +142,12 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:3000/api/v1/users/4
+DELETE http://localhost:3000/api/v1/users/2
 ###
 
 
-POST http://localhost:3000/api/v1/localhost:3000/api/v1/workouts/seed
+POST http://localhost:3000/api/v1/users/seed
+###
+
+POST http://localhost:3000/api/v1/workouts/seed
 ###

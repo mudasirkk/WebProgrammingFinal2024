@@ -1,3 +1,4 @@
+/** @type {{ items: Workout[] }} */
 const data = require("../data/workouts.json");
 const { getConnection } = require("./supabase");
 
