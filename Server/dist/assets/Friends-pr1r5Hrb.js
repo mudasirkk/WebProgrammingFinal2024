@@ -1,0 +1,1 @@
+import{_ as s,c as t,a as n,o as r}from"./index-Df2uEdI6.js";const o={},a={class:"friends"};function c(i,e){return r(),t("div",a,e[0]||(e[0]=[n("h1",null,"This is a Friend Activity page",-1)]))}const _=s(o,[["render",c]]);export{_ as default};

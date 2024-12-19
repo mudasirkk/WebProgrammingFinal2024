@@ -1,0 +1,1 @@
+import{_ as t,c as e,a,o as c}from"./index-Df2uEdI6.js";const o={},i={class:"statistics"};function n(r,s){return c(),e("div",i,s[0]||(s[0]=[a("h1",null,"This is a Statistics page",-1)]))}const l=t(o,[["render",n]]);export{l as default};

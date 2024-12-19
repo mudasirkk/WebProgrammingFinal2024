@@ -76,7 +76,6 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -126,8 +125,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
-
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
@@ -196,7 +193,6 @@ dist
 ### Vuejs ###
 # Recommended template: Node.gitignore
 
-dist/
 npm-debug.log
 yarn-error.log
 

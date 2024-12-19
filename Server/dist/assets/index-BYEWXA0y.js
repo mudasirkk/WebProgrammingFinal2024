@@ -1,0 +1,1 @@
+import{_ as s,c as n,a as o,o as t}from"./index-Df2uEdI6.js";const a={},c={class:"index"};function r(i,e){return t(),n("div",c,e[0]||(e[0]=[o("h1",null,"This is a index page",-1)]))}const _=s(a,[["render",r]]);export{_ as default};
