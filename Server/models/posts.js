@@ -1,4 +1,4 @@
-const data = require("../data/workouts.json");
+const data = require("../data/posts.json");
 const { getConnection } = require("./supabase");
 
 const conn = getConnection();
@@ -10,16 +10,16 @@ const conn = getConnection();
  */
 
 /**
- * @typedef {import("../../Client/src/models/workouts").Workout} Workout
+ * @typedef {import("../../Client/src/models/posts").Post} Post
  */
 
 /**
- * Get all workouts
- * @returns {Promise<DataListEnvelope<Workout>>}
+ * Get all posts
+ * @returns {Promise<DataListEnvelope<Post>>}
  */
 async function getAll() {
   const { data, error, count } = await conn
-    .from("workouts")
+    .from("posts")
     .select("*", { count: "estimated" });
   return {
     isSuccess: !error,
@@ -30,13 +30,13 @@ async function getAll() {
 }
 
 /**
- * Get a workout by id
+ * Get a post by id
  * @param {number} id
- * @returns {Promise<DataEnvelope<Workout>>}
+ * @returns {Promise<DataEnvelope<Post>>}
  */
 async function get(id) {
   const { data, error } = await conn
-    .from("workouts")
+    .from("posts")
     .select("*")
     .eq("id", id)
     .single();
@@ -48,21 +48,20 @@ async function get(id) {
 }
 
 /**
- * Add a new workout
- * @param {Workout} workout
- * @returns {Promise<DataEnvelope<Workout>>}
+ * Add a new post
+ * @param {Post} post
+ * @returns {Promise<DataEnvelope<Post>>}
  */
-async function add(workout) {
+async function add(post) {
   const { data, error } = await conn
-    .from("workouts")
+    .from("posts")
     .insert([
       {
-        userid: workout.userid,
-        title: workout.title,
-        date: workout.date,
-        duration: workout.duration,
-        location: workout.location,
-        type: workout.type,
+        workoutType: post.workoutType,
+        description: post.description,
+        date: post.date,
+        location: post.location,
+        userId: post.userId,
       },
     ])
     .select("*")
@@ -75,21 +74,20 @@ async function add(workout) {
 }
 
 /**
- * Update a workout
+ * Update a post
  * @param {number} id
- * @param {Workout} workout
- * @returns {Promise<DataEnvelope<Workout>>}
+ * @param {Post} post
+ * @returns {Promise<DataEnvelope<Post>>}
  */
-async function update(id, workout) {
+async function update(id, post) {
   const { data, error } = await conn
-    .from("workouts")
+    .from("posts")
     .update({
-      userid: workout.userid,
-      title: workout.title,
-      date: workout.date,
-      duration: workout.duration,
-      location: workout.location,
-      type: workout.type,
+      workoutType: post.workoutType,
+      description: post.description,
+      date: post.date,
+      location: post.location,
+      userId: post.userId,
     })
     .eq("id", id)
     .select("*")
@@ -102,13 +100,13 @@ async function update(id, workout) {
 }
 
 /**
- * Remove a workout
+ * Remove a post
  * @param {number} id
  * @returns {Promise<DataEnvelope<number>>}
  */
 async function remove(id) {
   const { data, error } = await conn
-    .from("workouts")
+    .from("posts")
     .delete()
     .eq("id", id)
     .select("*")
@@ -122,9 +120,9 @@ async function remove(id) {
 
 async function getByUser(userid) {
   const { data, error, count } = await conn
-    .from("workouts")
-    .select("*", { count: "estimated" })
-    .eq("userid", userid);
+    .from("posts")
+    .select("*")
+    .eq("userId", userid);
   return {
     isSuccess: !error,
     message: error?.message,
@@ -134,8 +132,8 @@ async function getByUser(userid) {
 }
 
 async function seed() {
-  for (const Workout of data.items) {
-    await add(Workout);
+  for (const Post of data.items) {
+    await add(Post);
   }
 }
 

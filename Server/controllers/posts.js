@@ -1,4 +1,4 @@
-const model = require("../models/workouts");
+const model = require("../models/posts");
 const express = require("express");
 const app = express.Router();
 
@@ -18,10 +18,10 @@ app
       .catch(next);
   })
 
-  .get("/userworkout/:userid", (req, res, next) => {
-    const userid = +req.params.userid;
+  .get("/userpost/:userId", (req, res, next) => {
+    const userId = +req.params.userId;
     model
-      .getByUser(userid)
+      .getByUser(userId)
       .then((x) => res.send(x))
       .catch(next);
   })
@@ -45,13 +45,6 @@ app
     const id = +req.params.id;
     model
       .remove(id)
-      .then((x) => res.send(x))
-      .catch(next);
-  })
-
-  .post("/seed", (req, res, next) => {
-    model
-      .seed()
       .then((x) => res.send(x))
       .catch(next);
   });

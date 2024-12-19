@@ -1,10 +1,9 @@
-const path = require("path");
-const filePath = path.join(__dirname, "../data/users.json");
-
+const data = require("../data/users.json");
 const { getConnection } = require("./supabase");
+
 const conn = getConnection();
 
-const data = { items: require(filePath).users };
+require("dotenv").config();
 
 /**
  * @template T
@@ -43,6 +42,14 @@ async function get(id) {
     .select("*")
     .eq("id", id)
     .single();
+  if (error || !data) {
+    throw {
+      isSuccess: false,
+      message: "The user with the given ID was not found. ID:" + id,
+      data: null,
+      status: 404,
+    };
+  }
   return {
     isSuccess: !error,
     message: error?.message,
@@ -97,9 +104,17 @@ async function update(id, user) {
     .eq("id", id)
     .select("*")
     .single();
+
+  if (!data) {
+    return {
+      isSuccess: false,
+      message: "User not found",
+      data: null,
+    };
+  }
   return {
     isSuccess: !error,
-    message: error?.message,
+    message: error?.message || "Update successful",
     data: data,
   };
 }
@@ -123,6 +138,34 @@ async function remove(id) {
   };
 }
 
+async function login(email, password) {
+  const { data, error } = await conn
+    .from("users")
+    .select("*")
+    .eq("email", email)
+    .single();
+  if (!data) {
+    return {
+      isSuccess: false,
+      message: `The email ${email} does not exist`,
+      data: null,
+    };
+  }
+  if (data.password === password) {
+    return {
+      isSuccess: true,
+      message: "Login successful",
+      data: data,
+    };
+  } else {
+    return {
+      isSuccess: false,
+      message: "Incorrect password",
+      data: null,
+    };
+  }
+}
+
 async function seed() {
   for (const User of data.items) {
     await add(User);
@@ -135,5 +178,6 @@ module.exports = {
   add,
   update,
   remove,
+  login,
   seed,
 };

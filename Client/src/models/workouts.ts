@@ -5,8 +5,12 @@ export async function getAll() {
   return api<DataListEnvelope<Workout>>('workouts')
 }
 
+export async function get(id: number) {
+  return api<DataEnvelope<Workout>>(`workouts/${id}`)
+}
+
 export async function getByUser(userid: number) {
-  return api<DataListEnvelope<Workout>>(`workouts/${userid}`)
+  return api<DataListEnvelope<Workout>>(`workouts/userworkout/${userid}`)
 }
 
 export function add(workout: Workout) {

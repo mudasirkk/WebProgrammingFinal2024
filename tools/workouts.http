@@ -1,77 +1,150 @@
-GET http://localhost:3000/about
-
+//Check Posts
+GET http://localhost:3000/api/v1/posts
 ###
+
+POST http://localhost:3000/api/v1/posts
+Content-Type: application/json
+
+{
+      "workoutType": "Cardio",
+      "description": "Completed a 5km run this morning at a steady pace.",
+      "date": "2024-11-01",
+      "location": "Central Park",
+      "userId": 5
+}
+###
+
+GET http://localhost:3000/api/v1/posts/3
+###
+
+GET http://localhost:3000/api/v1/posts/userpost/5
+###
+
+PATCH http://localhost:3000/api/v1/posts/3
+Content-Type: application/json
+
+{
+      "workoutType": "Strength",
+      "description": "Lifted weights for 1 hour at the gym.",
+      "date": "2024-11-01",
+      "location": "Gym",
+      "userId": 5
+}
+###
+
+DELETE http://localhost:3000/api/v1/posts/2
+###
+
+
+
+
+//Check Workouts
 GET http://localhost:3000/api/v1/workouts
 
 ###
-GET http://localhost:3000/api/v1/workouts/1
+GET http://localhost:3000/api/v1/workouts/7
 ###
 
-DELETE http://localhost:3000/api/v1/workouts/1
+GET http://localhost:3000/api/v1/workouts/userworkout/5
+###
+
+DELETE http://localhost:3000/api/v1/workouts/3
 ###
 
 POST http://localhost:3000/api/v1/workouts
 Content-Type: application/json
 
 {
-      "userid": 1,
-      "username": "johndoe",
-      "description": "A Swim across the Atlantic",
-      "title": "Atlantic Swim",
-      "date": "2000-01-01",
-      "duration": 300,
-      "location" : "Atlantic Ocean",
-      "type": "Swimming",
+     
+      "userid": 5,
+      "title": "Hike",
+      "date": "2024-09-01",
+      "duration": 30,
+      "location": "Central Park",
+      "type": "Cardio"
 }
-
 ###
-PATCH http://localhost:3000/api/v1/workouts/1
+
+PATCH http://localhost:3000/api/v1/workouts/5
 Content-Type: application/json
 
 {
-      "userid": 2,
-      "username": "janesmith",
-      "description": "A Swim across the Atlantic",
-      "title": "Atlantic Swim",
+      "userid": 1,
+      "title": "Swim",
       "date": "2000-01-01",
       "duration": 400,
       "location" : "Atlantic Ocean",
-      "type": "Swimming",
+      "type": "Swimming"
 }
 ###
-GET http://localhost:3000/api/v1/workouts
+GET http://localhost:3000/api/v1/workouts/userworkout/1
 
+//Check Users
 ###
 GET http://localhost:3000/api/v1/users/
-
 ###
-GET http://localhost:3000/api/v1/users/2
 
-###
-PATCH http://localhost:3000/api/v1/users/2
-
+POST http://localhost:3000/api/v1/users
 Content-Type: application/json
-      {
-      "fname": "Jane",
+
+{
+     "fname": "Jane",
       "lname": "Smith",
       "email": "jane.smith@example.com",
       "username": "janesmith",
       "password": "pass321",
-      "isAdmin": true
-    }
-
+      "isAdmin": false
+}
 ###
-DELETE http://localhost:3000/api/v1/users/10
 
-###
-POST http://localhost:3000/api/v1/users/
+POST http://localhost:3000/api/v1/users/login
 Content-Type: application/json
 
 {
-      "fname": "Moshe",
-      "lname": "Plotkin",
-      "email": "moshe.plotkin@example.com",
-      "username": "mosheplotkin",
-      "password": "pass321",
-      "isAdmin": false
+     "email": "jane.smith@example.com",
+      "password": "pass321"
 }
+###
+
+
+POST http://localhost:3000/api/v1/users/login
+Content-Type: application/json
+
+{
+     "email": "john.smith@example.com",
+      "password": "pass123"
+}
+###
+
+POST http://localhost:3000/api/v1/users/login
+Content-Type: application/json
+
+{
+     "email": "john.smith@example.com",
+      "password": "newpassword123"
+}
+###
+
+###
+GET http://localhost:3000/api/v1/users/5
+
+###
+PATCH http://localhost:3000/api/v1/users/5
+Content-Type: application/json
+
+{
+  "fname": "John",
+  "lname": "Smith",
+  "email": "john.smith@example.com",
+  "username": "johnsmith",
+  "password": "newpassword123",
+  "isAdmin": false
+}
+###
+
+DELETE http://localhost:3000/api/v1/users/4
+###
+
+
+POST http://localhost:3000/api/v1/localhost:3000/api/v1/workouts/seed
+###
