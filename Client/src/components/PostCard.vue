@@ -28,7 +28,7 @@ watchEffect(async () => {
           >Date: </span
         >{{ post.date }}
       </p>
-      <p class="has-text-black bold">{{ post.description }}</p>
+      <p style="font-weight: bold">{{ post.description }}</p>
       <div class="columns">
         <div class="column is-one-third">
           <p class="has-text-primary">Type</p>

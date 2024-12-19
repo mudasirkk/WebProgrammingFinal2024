@@ -47,10 +47,10 @@ const handleLogout = () => {
           Home
         </RouterLink>
         <div v-if="session.user != null" class="navbar-start">
-          <RouterLink to="/activity" class="navbar-item">
+          <RouterLink to="/workout" class="navbar-item">
             <i class="fas fa-running"></i> My Workout
           </RouterLink>
-          <RouterLink to="/friends" class="navbar-item"
+          <RouterLink to="/post" class="navbar-item"
             ><i class="fas fa-users"></i> Activity
           </RouterLink>
           <RouterLink to="/people" class="navbar-item"
