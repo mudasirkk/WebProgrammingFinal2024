@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api/v1/'
+const API_BASE_URL = 'https://fitnessapp-uay6.onrender.com'
+const API_URL = 'http://fitnessapp-uay6.onrender.com/api/v1/'
 
 export function rest<T>(
   url: string,
