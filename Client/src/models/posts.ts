@@ -13,7 +13,7 @@ export async function getByUser(userid: number) {
   return api<DataListEnvelope<Post>>(`posts/userpost/${userid}`)
 }
 
-export function create(post: Post) {
+export function add(post: Post) {
   return api<DataEnvelope<Post>>('posts', post)
 }
 
@@ -26,7 +26,7 @@ export function remove(id: number) {
 }
 
 export interface Post {
-  id: number
+  id?: number
   workoutType: string
   description: string
   date: string
